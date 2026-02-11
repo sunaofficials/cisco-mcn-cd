@@ -10,7 +10,7 @@ spec:
     targetRevision: main
     path: aks-prod
   destination:
-    server: https://aks-cisco-rg-cisco-mcn-53af53-wfgir91r.hcp.centralindia.azmk8s.io:443
+    server: https://aks-cisco--rg-cisco-mcn-53af53-wfgir91r.hcp.centralindia.azmk8s.io:443
     namespace: cisco-shopping
   syncPolicy:
     automated:
