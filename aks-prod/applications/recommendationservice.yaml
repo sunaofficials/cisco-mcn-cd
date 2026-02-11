@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cisco-mcn-aks-prod
+  name: recommendationservice-aks
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/sunaofficials/cisco-mcn-cd
     targetRevision: main
-    path: aks-prod/applications  # <-- points to folder with raw manifests
+    path: aks-prod/recommendationservice
 
   destination:
     server: https://aks-cisco--rg-cisco-mcn-53af53-wfgir91r.hcp.centralindia.azmk8s.io:443
