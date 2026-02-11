@@ -4,27 +4,26 @@ metadata:
   name: frontend-ingress
   namespace: cisco-shopping
   annotations:
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-
-    # Argo ordering
-    argocd.argoproj.io/sync-wave: "1"
-
-    # 🔐 HTTPS + redirect (THIS is the key fix)
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
-    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/healthcheck-path: /_healthz
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/success-codes: "200"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-2:814820107207:certificate/567a5a66-5e00-47ce-a619-b9339808971b
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
 
 spec:
   ingressClassName: alb
   rules:
-    - host: ssnarch.click
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend
-                port:
-                  number: 80
+  - host: ssnarch.click
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
