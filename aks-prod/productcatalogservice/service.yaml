@@ -3,7 +3,10 @@ kind: Service
 metadata:
   name: productcatalogservice
   namespace: cisco-shopping
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
+  type: LoadBalancer
   selector:
     app: productcatalogservice
   ports:

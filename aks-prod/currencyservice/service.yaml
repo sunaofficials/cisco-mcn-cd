@@ -3,10 +3,12 @@ kind: Service
 metadata:
   name: currencyservice
   namespace: cisco-shopping
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: currencyservice
   ports:
-  - port: 7000
-    targetPort: 7000
+    - port: 7000
+      targetPort: 7000
