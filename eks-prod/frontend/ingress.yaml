@@ -10,7 +10,7 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-path: /_healthz
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
     alb.ingress.kubernetes.io/success-codes: "200"
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-2:814820107207:certificate/567a5a66-5e00-47ce-a619-b9339808971b
     alb.ingress.kubernetes.io/ssl-redirect: "443"
 
