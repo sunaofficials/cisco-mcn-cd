@@ -29,14 +29,12 @@ spec:
             memory: "128Mi"
             cpu: "150m"
         readinessProbe:
-          httpGet:
-            path: /
+          grpc:
             port: 7070
           initialDelaySeconds: 5
           periodSeconds: 10
         livenessProbe:
-          httpGet:
-            path: /
+          grpc:
             port: 7070
           initialDelaySeconds: 15
           periodSeconds: 20
