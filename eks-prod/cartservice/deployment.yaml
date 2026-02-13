@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: cartservice
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: cartservice
@@ -20,4 +21,22 @@ spec:
         env:
         - name: REDIS_ADDR
           value: redis-cart:6379
-
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+          requests:
+            memory: "12"
+            cpu: "150m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7070
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7070
+            initialDelaySeconds: 15
+            periodSeconds: 20
