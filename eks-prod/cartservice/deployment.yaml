@@ -26,7 +26,7 @@ spec:
             memory: "256Mi"
             cpu: "300m"
           requests:
-            memory: "12"
+            memory: "128Mi"
             cpu: "150m"
           readinessProbe:
             httpGet:
