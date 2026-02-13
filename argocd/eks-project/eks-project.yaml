@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: eks-prod
+  namespace: argocd
+spec:
+  description: EKS Production Project
+
+  sourceRepos:
+    - https://github.com/sunaofficials/cisco-mcn-cd
+
+  destinations:
+    - namespace: cisco-shopping
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+

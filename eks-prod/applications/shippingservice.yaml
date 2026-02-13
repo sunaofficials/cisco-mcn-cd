@@ -4,7 +4,7 @@ metadata:
   name: shippingservice
   namespace: argocd
 spec:
-  project: default
+  project: eks-prod
   source:
     repoURL: https://github.com/sunaofficials/cisco-mcn-cd
     targetRevision: main

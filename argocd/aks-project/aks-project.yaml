@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: aks-prod
+  namespace: argocd
+spec:
+  description: AKS Production Project
+
+  sourceRepos:
+    - https://github.com/sunaofficials/cisco-mcn-cd
+
+  destinations:
+    - namespace: cisco-shopping
+      server: https://aks-cisco--rg-cisco-mcn-53af53-wfgir91r.hcp.centralindia.azmk8s.io:443
+
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
