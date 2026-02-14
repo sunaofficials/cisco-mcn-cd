@@ -13,7 +13,7 @@ spec:
         app: recommendationservice
     spec:
       nodeSelector:
-        node-role: app
+        kubernetes.azure.com/mode: user
       tolerations:
       - key: "node-role"  
         operator: "Equal"
