@@ -13,6 +13,8 @@ spec:
       labels:
         app: adservice
     spec:
+      nodeSelector:
+        node-role: app
       serviceAccountName: adservice
       terminationGracePeriodSeconds: 5
       securityContext:

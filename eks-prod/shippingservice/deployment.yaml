@@ -13,6 +13,8 @@ spec:
       labels:
         app: shippingservice
     spec:
+      nodeSelector:
+        node-role: app
       serviceAccountName: shippingservice
       securityContext:
         fsGroup: 1000

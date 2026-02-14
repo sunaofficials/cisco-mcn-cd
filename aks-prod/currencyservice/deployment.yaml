@@ -14,6 +14,8 @@ spec:
       labels:
         app: currencyservice
     spec:
+      nodeSelector:
+        node-role: app
       serviceAccountName: currencyservice
       securityContext:
         runAsNonRoot: true
