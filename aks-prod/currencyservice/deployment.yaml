@@ -16,6 +16,11 @@ spec:
     spec:
       nodeSelector:
         node-role: app
+      tolerations:
+      - key: "node-role"
+        operator: "Equal"
+        value: "app"
+        effect: "NoSchedule"  
       serviceAccountName: currencyservice
       securityContext:
         runAsNonRoot: true

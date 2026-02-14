@@ -14,6 +14,11 @@ spec:
     spec:
       nodeSelector:
         node-role: app
+      tolerations:
+      - key: "node-role"
+        operator: "Equal"
+        value: "app"
+        effect: "NoSchedule"  
       serviceAccountName: productcatalogservice
       containers:
       - name: server
