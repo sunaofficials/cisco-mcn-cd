@@ -1,7 +1,8 @@
 apiVersion: persistentvolumeclaim/v1
 kind: PersistentVolumeClaim
 metadata:
-  name: redis-cart-pvc  
+  name: redis-cart-pvc
+  namespace: cisco-shopping
 spec:
   accessModes:
   - ReadWriteOnce
