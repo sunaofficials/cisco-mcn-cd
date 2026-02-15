@@ -5,8 +5,8 @@ metadata:
   namespace: cisco-shopping
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
+  storageClassName: gp3
   resources:
     requests:
       storage: 1Gi
-  storageClassName: gp3

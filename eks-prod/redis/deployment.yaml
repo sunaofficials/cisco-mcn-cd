@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-cart
+  namespace: cisco-shopping
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: redis-cart
@@ -12,17 +14,16 @@ spec:
         app: redis-cart
     spec:
       nodeSelector:
-        node-role: app
+        node-role: db
       containers:
-      - name: redis
-        image: redis:alpine
-        ports:
-        - containerPort: 6379
-        volumeMounts:
-        - name: redis-cart-volume
-          mountPath: /data
+        - name: redis
+          image: redis:alpine
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-cart-volume
+              mountPath: /data
       volumes:
-      - name: redis-cart-volume
-        persistentVolumeClaim:
-          claimName: redis-cart-pvc
-
+        - name: redis-cart-volume
+          persistentVolumeClaim:
+            claimName: redis-cart-pvc
