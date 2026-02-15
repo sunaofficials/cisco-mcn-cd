@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::814820107207:oidc-provider/oidc.eks.ap-south-2.amazonaws.com/id/BB8398CDF7BFB61AF9AA8EB4A757CEAE"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.ap-south-2.amazonaws.com/id/BB8398CDF7BFB61AF9AA8EB4A757CEAE:sub": "system:serviceaccount:cisco-shopping:redis-sa"
+        }
+      }
+    }
+  ]
+}
+
