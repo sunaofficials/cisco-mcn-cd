@@ -4,7 +4,6 @@ metadata:
   name: redis-cart
   namespace: cisco-shopping
 spec:
-  serviceAccountName: redis-sa
   replicas: 1
   selector:
     matchLabels:
@@ -14,36 +13,43 @@ spec:
       labels:
         app: redis-cart
     spec:
+      serviceAccountName: redis-sa
+
       nodeSelector:
         node-role: db
+
       securityContext:
         fsGroup: 1000
 
       containers:
-        - name: redis
-          image: redis:alpine
-          ports:
-            - containerPort: 6379
-          volumeMounts:
-            - name: redis-cart-volume
-              mountPath: /data
-            - name: redis-secret
-              mountPath: /etc/secrets
-              readOnly: true
-          env:
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redis-secret
-                  key: REDIS_PASSWORD
+      - name: redis
+        image: redis:alpine
+
+        command:
+        - sh
+        - -c
+        - |
+          redis-server --requirepass "$(cat /etc/secrets/password)"
+
+        ports:
+        - containerPort: 6379
+
+        volumeMounts:
+        - name: redis-cart-volume
+          mountPath: /data
+
+        - name: redis-secret
+          mountPath: /etc/secrets
+          readOnly: true
 
       volumes:
-        - name: redis-secret
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "redis-secret-provider"
-        - name: redis-cart-volume
-          persistentVolumeClaim:
-            claimName: redis-cart-pvc
+      - name: redis-secret
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: redis-secret-provider
+
+      - name: redis-cart-volume
+        persistentVolumeClaim:
+          claimName: redis-cart-pvc
