@@ -15,6 +15,9 @@ spec:
     spec:
       nodeSelector:
         node-role: db
+      securityContext:
+        fsGroup: 1000
+      
       containers:
         - name: redis
           image: redis:alpine
@@ -22,7 +25,7 @@ spec:
             - containerPort: 6379
           volumeMounts:
             - name: redis-cart-volume
-              mountPath: /data
+              mountPath: /data  
       volumes:
         - name: redis-cart-volume
           persistentVolumeClaim:
